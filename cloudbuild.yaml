@@ -8,7 +8,7 @@ steps:
   args:
   - run
   - --filename=gke-config.yml
-  - --image=node:latest
+  - --image=gcr.io/gcptestbed-270905/myreact-image:latest
   - --cluster=gkecluster
   - --location=us-central1-f
 - name: gcr.io/cloud-builders/kubectl

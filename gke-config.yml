@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: "hello-app"
-        image: "gcr.io/google-samples/hello-app:1.0"
+        image: "gcr.io/gcptestbed-270905/myreact-image:latest"
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
