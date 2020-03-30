@@ -7,7 +7,7 @@ steps:
 - name: gcr.io/cloud-builders/gke-deploy
   args:
   - run
-  - --filename=reactapp/gke-config.yml
+  - --filename=gke-config.yml
   - --image=node:latest
   - --cluster=gkecluster
   - --location=us-central1-f
