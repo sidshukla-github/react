@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+
+  labels:
+    app: gkeapp
+    app.kubernetes.io/managed-by: gcp-cloud-build-deploy
+  name: gkeservice
+  namespace: default
+  
+  selfLink: /api/v1/namespaces/default/services/gkeservice
+  
+spec:
+  
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31253
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: gkeapp
+  sessionAffinity: None
+  type: LoadBalancer
+
