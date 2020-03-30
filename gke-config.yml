@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "myapp"
+  namespace: "default"
+  labels:
+    app: "myapp"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "myapp"
+  template:
+    metadata:
+      labels:
+        app: "myapp"
+    spec:
+      containers:
+      - name: "hello-app"
+        image: "gcr.io/google-samples/hello-app:1.0"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "myapp-hpa-yhw1"
+  namespace: "default"
+  labels:
+    app: "app"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "myapp"
+    apiVersion: "apps/v1"
+  minReplicas: 3
+  maxReplicas: 4
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80

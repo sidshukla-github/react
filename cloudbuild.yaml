@@ -1,11 +1,18 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/fluent-archway-239902/myreact-image', '.']
+  args: ['build', '-t', 'gcr.io/gcptestbed-270905/myreact-image', '.']
   timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/fluent-archway-239902/myreact-image']
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment/react', 'myreact-image-sha256=gcr.io/fluent-archway-239902/myreact-image']
+  args: ['push', 'gcr.io/gcptestbed-270905/myreact-image']
+- name: gcr.io/cloud-builders/gke-deploy
+  args:
+  - run
+  - --filename=reactapp/gke-config.yml
+  - --image=node:latest
+  - --cluster=gkecluster
+  - --location=us-central1-f
+- name: gcr.io/cloud-builders/kubectl
+  args: ['expose', 'deployment', 'gkeapp', '--type=LoadBalancer', '--port=80','--target-port=8080', '--name=gkeservice']
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=rc'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-f'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gkecluster'
