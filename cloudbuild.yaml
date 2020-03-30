@@ -1,7 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/gcptestbed-270905/myreact-image', '.']
-  timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/gcptestbed-270905/myreact-image']
 - name: gcr.io/cloud-builders/gke-deploy
