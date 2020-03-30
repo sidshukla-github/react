@@ -13,3 +13,6 @@ steps:
 
 - name: gcr.io/cloud-builders/kubectl
   args: ['apply', '-f', 'react-service.yaml']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-f'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=gkecluster'
