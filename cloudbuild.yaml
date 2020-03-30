@@ -11,7 +11,7 @@ steps:
   - --cluster=gkecluster
   - --location=us-central1-f
 - name: gcr.io/cloud-builders/kubectl
-  args: ['expose', 'deployment', 'gkeapp', '--type=LoadBalancer', '--port=80','--target-port=8080', '--name=gkeservice']
+  args: ['expose', 'deployment', 'gkeapp', '--type=LoadBalancer', '--port=80','--target-port=3000', '--name=gkeservice']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-f'
   - 'CLOUDSDK_CONTAINER_CLUSTER=gkecluster'
